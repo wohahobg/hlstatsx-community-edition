@@ -95,36 +95,36 @@ public plugin_init()
     
 	// building the menus only once
 	g_HLstatsX_MainMenu = menu_create("HLstatsX - Main Menu", "mainmenu_handle")
-	menu_additem(g_HLstatsX_MainMenu, "Display Rank",            "1")
-	menu_additem(g_HLstatsX_MainMenu, "Next Players",            "2")
-	menu_additem(g_HLstatsX_MainMenu, "Top10 Players",           "3")
-	menu_additem(g_HLstatsX_MainMenu, "Clans Ranking",           "4")
+	//menu_additem(g_HLstatsX_MainMenu, "Display Rank",            "1")
+	//menu_additem(g_HLstatsX_MainMenu, "Next Players",            "2")
+	//menu_additem(g_HLstatsX_MainMenu, "Top10 Players",           "3")
+	//menu_additem(g_HLstatsX_MainMenu, "Clans Ranking",           "4")
 	menu_additem(g_HLstatsX_MainMenu, "Server Status",           "5")
 	menu_additem(g_HLstatsX_MainMenu, "Statsme",                 "6")
-	menu_additem(g_HLstatsX_MainMenu, "Auto Ranking",            "7")
-	menu_additem(g_HLstatsX_MainMenu, "Console Events",          "8")
+	//menu_additem(g_HLstatsX_MainMenu, "Auto Ranking",            "7")
+	//menu_additem(g_HLstatsX_MainMenu, "Console Events",          "8")
 	menu_additem(g_HLstatsX_MainMenu, "Weapon Usage",            "9")
 	menu_additem(g_HLstatsX_MainMenu, "Weapons Accuracy",       "10")
 	menu_additem(g_HLstatsX_MainMenu, "Weapons Targets",        "11")
 	menu_additem(g_HLstatsX_MainMenu, "Player Kills",           "12")
-	menu_additem(g_HLstatsX_MainMenu, "Toggle Ranking Display", "13")
-	menu_additem(g_HLstatsX_MainMenu, "VAC Cheaterlist",        "14")
-	menu_additem(g_HLstatsX_MainMenu, "Display Help",           "15")
+	//menu_additem(g_HLstatsX_MainMenu, "Toggle Ranking Display", "13")
+	//menu_additem(g_HLstatsX_MainMenu, "VAC Cheaterlist",        "14")
+	//menu_additem(g_HLstatsX_MainMenu, "Display Help",           "15")
 	menu_setprop(g_HLstatsX_MainMenu, MPROP_PERPAGE, 6)
 
-	g_HLstatsX_AutoMenu = menu_create("HLstatsX - Auto-Ranking", "automenu_handle")
-	menu_additem(g_HLstatsX_AutoMenu, "Enable on round-start",   "1")
-	menu_additem(g_HLstatsX_AutoMenu, "Enable on round-end",     "2")
-	menu_additem(g_HLstatsX_AutoMenu, "Enable on player death",  "3")
-	menu_additem(g_HLstatsX_AutoMenu, "Disable",                 "4")
-	menu_setprop(g_HLstatsX_AutoMenu, MPROP_PERPAGE, 0)
+	//g_HLstatsX_AutoMenu = menu_create("HLstatsX - Auto-Ranking", "automenu_handle")
+	//menu_additem(g_HLstatsX_AutoMenu, "Enable on round-start",   "1")
+	//menu_additem(g_HLstatsX_AutoMenu, "Enable on round-end",     "2")
+	//menu_additem(g_HLstatsX_AutoMenu, "Enable on player death",  "3")
+	//menu_additem(g_HLstatsX_AutoMenu, "Disable",                 "4")
+	//menu_setprop(g_HLstatsX_AutoMenu, MPROP_PERPAGE, 0)
 
-	g_HLstatsX_EventsMenu = menu_create("HLstatsX - Console Events", "eventsmenu_handle")
-	menu_additem(g_HLstatsX_EventsMenu, "Enable Events",         "1")
-	menu_additem(g_HLstatsX_EventsMenu, "Disable Events",        "2")
-	menu_additem(g_HLstatsX_EventsMenu, "Enable Global Chat",    "3")
-	menu_additem(g_HLstatsX_EventsMenu, "Disable Global Chat",   "4")
-	menu_setprop(g_HLstatsX_EventsMenu, MPROP_PERPAGE, 0)
+	//g_HLstatsX_EventsMenu = menu_create("HLstatsX - Console Events", "eventsmenu_handle")
+	//menu_additem(g_HLstatsX_EventsMenu, "Enable Events",         "1")
+	//menu_additem(g_HLstatsX_EventsMenu, "Disable Events",        "2")
+	//menu_additem(g_HLstatsX_EventsMenu, "Enable Global Chat",    "3")
+	//menu_additem(g_HLstatsX_EventsMenu, "Disable Global Chat",   "4")
+	//menu_setprop(g_HLstatsX_EventsMenu, MPROP_PERPAGE, 0)
 
 	register_menucmd(register_menuid("Display Menu"), display_menu_keys, "handle_internal_menu")
 	register_clcmd("say",		"hlx_block_commands")
@@ -137,10 +137,10 @@ public plugin_init()
 	find_player_team_slot("CT")
 	find_player_team_slot("TERRORIST")
 
-	g_msgSayText = get_user_msgid("SayText") 
-	g_msgTeamInfo = get_user_msgid("TeamInfo") 
+	g_msgSayText = get_user_msgid("SayText")
+	g_msgTeamInfo = get_user_msgid("TeamInfo")
 	g_HLstatsX_ColorArray = ArrayCreate()
-	
+
 	register_forward(FM_AlertMessage, "game_log_hook")
 }
 
@@ -209,7 +209,7 @@ public game_log_hook(AlertType: type, message[])
 }
 
 
-stock find_player_team_slot(team[16]) 
+stock find_player_team_slot(team[16])
 {
 
 	new team_index = get_team_index(team)
@@ -250,7 +250,7 @@ stock find_player_team_slot(team[16])
 }
 
 
-public validate_team_colors() 
+public validate_team_colors()
 {
 	if (ct_player_color > -1) {
 		if (is_user_connected(ct_player_color)) {
@@ -326,7 +326,7 @@ stock color_team_entities(message[192])
 			replace_all(message, 192, "TERRORIST", replace_message)
 			return ts_player_color
 		}
-	} 
+	}
 	if (ct_player_color > -1) {
 		if (contain(message, "CT") > -1) {
 			new replace_message[192]
@@ -337,11 +337,11 @@ stock color_team_entities(message[192])
 			return ct_player_color
 		}
 	}
-	
+
 	return -1
 }
 
-stock color_player(color_type, player_index, client_message[192]) 
+stock color_player(color_type, player_index, client_message[192])
 {
 	new color_player_index = -1
 	static client_name[192]
@@ -370,7 +370,7 @@ stock color_player(color_type, player_index, client_message[192])
 }
 
 
-stock color_all_players(message[192]) 
+stock color_all_players(message[192])
 {
 	new color_index = -1
 	ArrayClear(g_HLstatsX_ColorArray)
@@ -411,14 +411,14 @@ stock color_all_players(message[192])
 		}
 	}
 	ArrayClear(g_HLstatsX_ColorArray)
-	
+
 	return color_index
 }
 
 
 public client_kill()
 {
- 
+
 	new killer_id   = read_data(1)
 	new victim_id   = read_data(2)
 	new is_headshot = read_data(3)
@@ -431,7 +431,7 @@ public client_kill()
 		if (killer_id == victim_id) {
 			suicide = 1
 		}
-		
+
 		static killer_name[32], killer_team[16], killer_authid[32]
 		new killer_userid = get_user_userid(killer_id)
 
@@ -446,24 +446,24 @@ public client_kill()
 			if ((victim_id > 0) && (is_user_connected(victim_id))) {
 				static victim_name[32], victim_team[16], victim_authid[32]
 				new victim_userid = get_user_userid(victim_id)
-				
+
 				get_user_name(victim_id, victim_name, 31)
 				get_user_team(victim_id, victim_team, 15)
 				get_user_authid(victim_id, victim_authid, 31)
 
 				new victim_origin[3]
 				get_user_origin (victim_id, victim_origin)
-				
+
 				if (is_headshot > 0) {
 					headshot_logentry = " (headshot)"
 				}
 				format(logmessage_ignore, 511, "^"%s<%d><%s><%s>^" killed ^"%s<%d><%s><%s>^" with ^"%s^"",
-					killer_name, killer_userid, killer_authid, killer_team, 
-					victim_name, victim_userid, victim_authid, victim_team, 
+					killer_name, killer_userid, killer_authid, killer_team,
+					victim_name, victim_userid, victim_authid, victim_team,
 					weapon)
 				log_message("^"%s<%d><%s><%s>^" killed ^"%s<%d><%s><%s>^" with ^"%s^"%s (attacker_position ^"%d %d %d^") (victim_position ^"%d %d %d^")",
-					killer_name, killer_userid, killer_authid, killer_team, 
-					victim_name, victim_userid, victim_authid, victim_team, 
+					killer_name, killer_userid, killer_authid, killer_team,
+					victim_name, victim_userid, victim_authid, victim_team,
 					weapon, headshot_logentry,
 					killer_origin[0], killer_origin[1], killer_origin[2],
 					victim_origin[0], victim_origin[1], victim_origin[2])
@@ -473,11 +473,11 @@ public client_kill()
 			format(logmessage_ignore, 511, "^"%s<%d><%s><%s>^" committed suicide with ^"%s^"",
 				killer_name, killer_userid, killer_authid, killer_team, weapon)
 			log_message("^"%s<%d><%s><%s>^" committed suicide with ^"%s^" (attacker_position ^"%d %d %d^")",
-				killer_name, killer_userid, killer_authid, killer_team, weapon, 
+				killer_name, killer_userid, killer_authid, killer_team, weapon,
 				killer_origin[0], killer_origin[1], killer_origin[2])
 		}
     }
- 
+
 }
 
 
@@ -496,7 +496,7 @@ public client_joinedteam()
 }
 
 
-public client_disconnect(id)
+public client_disconnected(id)
 {
 	if ((id > 0) && (is_user_connected(id))) {
 		if ((ct_player_color == -1) || (id == ct_player_color)) {
@@ -519,7 +519,7 @@ public client_death(killer, victim, wpnindex, hitplace, TK)
 		static szTeam[16], szName[32], szAuthid[32], szWeapon[24]
 		new iUserid = get_user_userid(id)
 		new _max = xmod_get_maxweapons()
-	
+
 		get_user_team(id, szTeam, 15)
 		get_user_name(id, szName, 31)
 		get_user_authid(id, szAuthid, 31)
@@ -527,10 +527,10 @@ public client_death(killer, victim, wpnindex, hitplace, TK)
 		for (new i = 1; i < _max; ++i) {
 			if (get_user_wstats(id, i, iStats, iHits)) {
 				xmod_get_wpnname(i, szWeapon, 23)
-			
-				log_message("^"%s<%d><%s><%s>^" triggered ^"weaponstats^" (weapon ^"%s^") (shots ^"%d^") (hits ^"%d^") (kills ^"%d^") (headshots ^"%d^") (tks ^"%d^") (damage ^"%d^") (deaths ^"%d^")", 
+
+				log_message("^"%s<%d><%s><%s>^" triggered ^"weaponstats^" (weapon ^"%s^") (shots ^"%d^") (hits ^"%d^") (kills ^"%d^") (headshots ^"%d^") (tks ^"%d^") (damage ^"%d^") (deaths ^"%d^")",
 							szName, iUserid, szAuthid, szTeam, szWeapon, iStats[4], iStats[5], iStats[0], iStats[2], iStats[3], iStats[6], iStats[1])
-				log_message("^"%s<%d><%s><%s>^" triggered ^"weaponstats2^" (weapon ^"%s^") (head ^"%d^") (chest ^"%d^") (stomach ^"%d^") (leftarm ^"%d^") (rightarm ^"%d^") (leftleg ^"%d^") (rightleg ^"%d^")", 
+				log_message("^"%s<%d><%s><%s>^" triggered ^"weaponstats2^" (weapon ^"%s^") (head ^"%d^") (chest ^"%d^") (stomach ^"%d^") (leftarm ^"%d^") (rightarm ^"%d^") (leftleg ^"%d^") (rightleg ^"%d^")",
 							szName, iUserid, szAuthid, szTeam, szWeapon, iHits[1], iHits[2], iHits[3], iHits[4], iHits[5], iHits[6], iHits[7])
 			}
 		}
@@ -556,14 +556,14 @@ psay (client_id[], is_colored, client_message[192])
 		new player_count, temp_player_index, player_index
 		get_players(Players, player_count, "ch")
 		for (temp_player_index = 0; temp_player_index < player_count; temp_player_index++) {
-			new player = Players[temp_player_index] 
+			new player = Players[temp_player_index]
 			new temp_user_id = get_user_userid(player)
 			if (temp_user_id == client) {
 			   player_index = player
 			   break
 			}
 		}
-		
+
 		if ((player_index > 0) && (!is_user_bot(player_index)) && (is_user_connected(player_index))) {
 			new color_index = player_index
 
@@ -575,7 +575,7 @@ psay (client_id[], is_colored, client_message[192])
 				} else {
 					static client_message_backup[192]
 					copy(client_message_backup, 191, client_message)
-					
+
 					new player_color_index = color_all_players(client_message)
 					if (player_color_index > -1) {
 						color_index = player_color_index
@@ -606,7 +606,7 @@ psay (client_id[], is_colored, client_message[192])
 			if (is_user_connected(color_index)) {
 				color_team = get_user_team(color_index)
 			}
-			
+
 			if ((player_team != color_team) && (color_team > -1)) {
 				message_begin(MSG_ONE, g_msgTeamInfo, {0,0,0}, player_index)
 				write_byte(player_index)
@@ -630,7 +630,7 @@ psay (client_id[], is_colored, client_message[192])
 				message_end()
 			}
 
-		}	
+		}
 	}
 }
 
@@ -681,12 +681,12 @@ public hlx_amx_bulkpsay(id, level, cid)
 			}
 		}
 	}
-	
+
 	for (new i = 0; i < 8; i++)
 	{
 		psay(client_ids[i], is_colored, client_message);
 	}
-	
+
 	return PLUGIN_HANDLED
 }
 
@@ -699,7 +699,7 @@ public hlx_amx_psay(id, level, cid)
 
 	static client_id[32]
 	read_argv(1, client_id, 31)
-	copy(client_id, 30, client_id[1]) 
+	copy(client_id, 30, client_id[1])
 
 	static colored_param[32]
 	read_argv(2, colored_param, 31)
@@ -736,9 +736,9 @@ public hlx_amx_psay(id, level, cid)
 			}
 		}
 	}
-	
+
 	psay(client_id, is_colored, client_message)
-	
+
 	return PLUGIN_HANDLED
 }
 
@@ -752,7 +752,7 @@ public hlx_amx_psay2(id, level, cid)
 
 	static client_id[32]
 	read_argv(1, client_id, 31)
-	copy(client_id, 30, client_id[1]) 
+	copy(client_id, 30, client_id[1])
 
 	static colored_param[32]
 	read_argv(2, colored_param, 31)
@@ -787,7 +787,7 @@ public hlx_amx_psay2(id, level, cid)
 			}
 		}
 	}
-	
+
 	new client = str_to_num(client_id)
 
 	if (client > 0) {
@@ -795,14 +795,14 @@ public hlx_amx_psay2(id, level, cid)
 		new player_count, temp_player_index, player_index
 		get_players(Players, player_count, "ch")
 		for (temp_player_index = 0; temp_player_index < player_count; temp_player_index++) {
-			new player = Players[temp_player_index] 
+			new player = Players[temp_player_index]
 			new temp_user_id = get_user_userid(player)
 			if (temp_user_id == client) {
 			   player_index = player
 			   break
 			}
 		}
-		
+
 		if ((player_index > 0) && (!is_user_bot(player_index)) && (is_user_connected(player_index))) {
 			new color_index = player_index
 
@@ -822,9 +822,9 @@ public hlx_amx_psay2(id, level, cid)
 			write_byte(color_index)
 			write_string(display_message)
 			message_end()
-		}	
+		}
 	}
-	
+
 	return PLUGIN_HANDLED
 }
 
@@ -833,7 +833,7 @@ public hlx_amx_say(id, level, cid)
 {
 	if (!cmd_access(id, level, cid, 2))
 		return PLUGIN_HANDLED
-	
+
 	static message[192]
 	read_args(message, 191)
 	remove_quotes(message)
@@ -854,14 +854,14 @@ public hlx_amx_csay(id, level, cid)
 {
 	if (!cmd_access(id, level, cid, 2))
 		return PLUGIN_HANDLED
-	
+
 	static message[192]
 	read_args(message, 191)
 	remove_quotes(message)
-	
+
 	new color3[] = {255, 255, 255}
 	new Float:verpos = 0.3
-    
+
 	set_hudmessage(color3[0], color3[1], color3[2], -1.0, verpos, 0, 6.0, 6.0, 0.5, 0.15, -1)
 	show_hudmessage(0, "%s", message)
 
@@ -878,7 +878,7 @@ public hlx_amx_hint(id, level, cid)
 
 	static client_id[32]
 	read_argv(1, client_id, 31)
-	copy(client_id, 30, client_id[1]) 
+	copy(client_id, 30, client_id[1])
 
 	new client_message[192]
 	for(new i = 1; i < argument_count; i++) {
@@ -903,7 +903,7 @@ public hlx_amx_hint(id, level, cid)
 			}
 		}
 	}
-	
+
 	new client = str_to_num(client_id)
 
 	if (client > 0) {
@@ -911,23 +911,23 @@ public hlx_amx_hint(id, level, cid)
 		new player_count, temp_player_index, player_index
 		get_players(Players, player_count, "ch")
 		for (temp_player_index = 0; temp_player_index < player_count; temp_player_index++) {
-			new player = Players[temp_player_index] 
+			new player = Players[temp_player_index]
 			new temp_user_id = get_user_userid(player)
 			if (temp_user_id == client) {
 			   player_index = player
 			   break
 			}
 		}
-		
+
 		if ((player_index > 0) && (!is_user_bot(player_index)) && (is_user_connected(player_index))) {
-			new color3[0][] = {255, 128, 0}
-			new Float:verpos = 0.80
-	
-			set_hudmessage(color3[0][0], color3[0][1], color3[0][2], -1.0, verpos, 0, 6.0, 6.0, 0.5, 0.15, -1)
-			show_hudmessage(player_index, "%s", client_message)
-		}	
+			new color3[3] = {255, 128, 0};
+			new Float:verpos = 0.80;
+
+			set_hudmessage(color3[0], color3[1], color3[2], -1.0, verpos, 0, 6.0, 6.0, 0.5, 0.15, -1);
+			show_hudmessage(player_index, "%s", client_message);
+		}
 	}
-	
+
 	return PLUGIN_HANDLED
 }
 
@@ -944,7 +944,7 @@ public hlx_amx_msay(id, level, cid)
 
 	static name[32]
 	read_argv(2, name, 31)
-	copy(name, 30, name[1]) 
+	copy(name, 30, name[1])
 	new raw_user_id = str_to_num(name)
 
 	static handler_param[32]
@@ -959,14 +959,14 @@ public hlx_amx_msay(id, level, cid)
 		need_handler = 0
 		ignore_param = 1
 	}
-	
+
 	static message[1024]
 	new userid
 	new Players[32]
 	new player_count, player_index
 	get_players(Players, player_count, "ch")
 	for (player_index = 0; player_index < player_count; player_index++) {
-		new player = Players[player_index] 
+		new player = Players[player_index]
 		new temp_user_id = get_user_userid(player)
 		if (temp_user_id == raw_user_id) {
 		   userid = player
@@ -975,18 +975,18 @@ public hlx_amx_msay(id, level, cid)
 	}
 
 	read_args(message, 1023)
-	
+
 	new find_pattern[] = "#"
 	new find_pos = strfind(message, find_pattern)
 	new text_pos = find_pos + strlen(name) + 2
 	if (ignore_param == 1) {
 		text_pos += 3
 	}
-	
+
 	static menu_text[1024]
 	copy(menu_text, 1023, message[text_pos])
 	remove_quotes(menu_text)
-	
+
 	new menu_display[1024]
 
 	new i, start = 0
@@ -1001,7 +1001,7 @@ public hlx_amx_msay(id, level, cid)
 				nLen += format(menu_display[nLen], (1023 - nLen), "%s^n", buffer)
 				i += 1
 				start = i
-			}  
+			}
 		}
 	}
 
@@ -1012,7 +1012,7 @@ public hlx_amx_msay(id, level, cid)
 			show_menu(userid, display_menu_keys, menu_display, 15, "Display Menu")
 		}
 	}
-	
+
 	return PLUGIN_HANDLED
 
 }
@@ -1043,16 +1043,16 @@ public hlx_amx_browse(id, level, cid)
 
 	static name[32]
 	read_argv(1, name, 31)
-	copy(name, 30, name[1]) 
+	copy(name, 30, name[1])
 	new raw_user_id = str_to_num(name)
-	
+
 	static message[1024]
 	new userid
 	new Players[32]
 	new player_count, player_index
 	get_players(Players, player_count, "ch")
 	for (player_index = 0; player_index < player_count; player_index++) {
-		new player = Players[player_index] 
+		new player = Players[player_index]
 		new temp_user_id = get_user_userid(player)
 		if (temp_user_id == raw_user_id) {
 		   userid = player
@@ -1061,10 +1061,10 @@ public hlx_amx_browse(id, level, cid)
 	}
 
 	read_args(message, 1023)
-	
+
 	new find_pattern[] = "#"
 	new find_pos = strfind(message, find_pattern)
-	
+
 	static url[1024]
 	copy(url, 1023, message[find_pos + strlen(name) + 2])
 	remove_quotes(url)
@@ -1072,7 +1072,7 @@ public hlx_amx_browse(id, level, cid)
 	if ((userid > 0) && (!is_user_bot(userid)) && (is_user_connected(userid))) {
 		show_motd(userid, url, "HLstatsX CE")
 	}
-	
+
 	return PLUGIN_HANDLED
 }
 
@@ -1084,16 +1084,16 @@ public hlx_amx_swap(id, level, cid)
 
 	static client_id[32]
 	read_argv(1, client_id, 31)
-	copy(client_id, 30, client_id[1]) 
+	copy(client_id, 30, client_id[1])
 	new client = str_to_num(client_id)
-	
+
 	if (client > 0) {
 		new userid = 0
 		new Players[32]
 		new player_count, player_index
 		get_players(Players, player_count, "h")
 		for (player_index = 0; player_index < player_count; player_index++) {
-			new player = Players[player_index] 
+			new player = Players[player_index]
 			new temp_user_id = get_user_userid(player)
 			if (temp_user_id == client) {
 			   userid = player
@@ -1103,9 +1103,9 @@ public hlx_amx_swap(id, level, cid)
 
 		static player_team[32]
 		get_user_team(userid, player_team, 31)
-		
+
 		if ((userid > 0) && (is_user_connected(userid))) {
-	
+
 			if (strcmp(player_team, "TERRORIST") == 0) {
 				cs_set_user_team(userid, CS_TEAM_CT)
 				cs_reset_user_model(userid)
@@ -1135,7 +1135,7 @@ public hlx_amx_swap(id, level, cid)
 }
 
 
-stock make_player_command(client, player_command[192]) 
+stock make_player_command(client, player_command[192])
 {
 	if (client > 0) {
 		log_player_event(client, "say", player_command, 0)
@@ -1175,45 +1175,45 @@ public mainmenu_handle(id, menu, item)
 	if (item < 0) {
 		return PLUGIN_CONTINUE
 	}
- 
+
 	static command[16], name[64]
 	new access, callback
 	menu_item_getinfo(menu, item, access, command, 15, name, 63, callback)
- 
+
 	new choice = str_to_num(command)
 	switch (choice) {
-		case 1 : 
+		case 1 :
 			make_player_command(id, "/rank")
-		case 2 : 
+		case 2 :
 			make_player_command(id, "/next")
-		case 3 : 
+		case 3 :
 			make_player_command(id, "/top10")
-		case 4 : 
+		case 4 :
 			make_player_command(id, "/clans")
-		case 5 : 
+		case 5 :
 			make_player_command(id, "/status")
-		case 6 : 
+		case 6 :
 			make_player_command(id, "/statsme")
-		case 7 : 
+		case 7 :
 			display_automenu(id)
-		case 8 : 
+		case 8 :
 			display_eventsmenu(id)
-		case 9 : 
+		case 9 :
 			make_player_command(id, "/weapons")
-		case 10 : 
+		case 10 :
 			make_player_command(id, "/accuracy")
-		case 11 : 
+		case 11 :
 			make_player_command(id, "/targets")
-		case 12 : 
+		case 12 :
 			make_player_command(id, "/kills")
-		case 13 : 
+		case 13 :
 			make_player_command(id, "/hlx_hideranking")
-		case 14 : 
+		case 14 :
 			make_player_command(id, "/cheaters")
-		case 15 : 
+		case 15 :
 			make_player_command(id, "/help")
 	}
-  
+
 	return PLUGIN_HANDLED
 }
 
@@ -1223,23 +1223,23 @@ public automenu_handle(id, menu, item)
 	if (item < 0) {
 		return PLUGIN_CONTINUE
 	}
- 
+
 	static command[16], name[64]
 	new access, callback
 	menu_item_getinfo(menu, item, access, command, 15, name, 63, callback)
- 
+
 	new choice = str_to_num(command)
 	switch (choice) {
-		case 1 : 
+		case 1 :
 			make_player_command(id, "/hlx_auto start rank")
-		case 2 : 
+		case 2 :
 			make_player_command(id, "/hlx_auto end rank")
-		case 3 : 
+		case 3 :
 			make_player_command(id, "/hlx_auto kill rank")
-		case 4 : 
+		case 4 :
 			make_player_command(id, "/hlx_auto clear")
 	}
-  
+
 	return PLUGIN_HANDLED
 }
 
@@ -1249,23 +1249,23 @@ public eventsmenu_handle(id, menu, item)
 	if (item < 0) {
 		return PLUGIN_CONTINUE
 	}
- 
+
 	static command[16], name[64]
 	new access, callback
 	menu_item_getinfo(menu, item, access, command, 15, name, 63, callback)
- 
+
 	new choice = str_to_num(command)
 	switch (choice) {
-		case 1 : 
+		case 1 :
 			make_player_command(id, "/hlx_display 1")
-		case 2 : 
+		case 2 :
 			make_player_command(id, "/hlx_display 0")
-		case 3 : 
+		case 3 :
 			make_player_command(id, "/hlx_chat 1")
-		case 4 : 
+		case 4 :
 			make_player_command(id, "/hlx_chat 0")
 	}
-  
+
 	return PLUGIN_HANDLED
 }
 
@@ -1294,13 +1294,13 @@ public hlx_block_commands(client)
 		if (client == 0) {
 			return PLUGIN_CONTINUE
 		}
-		
+
 		new block_chat_commands = get_pcvar_num(g_hlx_block_commands)
-		
+
 		static user_command[192]
 		read_args(user_command, 192)
 		static origin_command[192]
-		
+
 		new start_index = 0
 		new command_length = strlen(user_command)
 		if (command_length > 0) {
@@ -1310,20 +1310,20 @@ public hlx_block_commands(client)
 					user_command[command_length - 1] = 0
 				}
 			}
-		
+
 			if (user_command[start_index] == 47)	{
 				start_index++
 			}
 
 			copy(origin_command, 192, user_command[start_index])
 		}
-		
+
 		if (command_length > 0) {
 			if (block_chat_commands > 0) {
 
 				new command_type[32] = "say"
 				new command_blocked = is_command_blocked(origin_command)
-				
+
 				if (command_blocked > 0) {
 
 					if (is_user_connected(client)) {
@@ -1349,7 +1349,6 @@ public hlx_block_commands(client)
 			}
 		}
 	}
- 
+
 	return PLUGIN_CONTINUE
 }
-
