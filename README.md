@@ -22,3 +22,7 @@ Check out the documentation:
 ---
 
 Thank you for using HLStatsX:CE! 🎮  
+
+## Copyright & Attribution
+
+This project is based on [HLStatsX Community Edition](https://github.com/NomisCZ/hlstatsx-community-edition) by NomisCZ. The original project is available under GNU General Public License v2.0.

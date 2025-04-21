@@ -30,6 +30,8 @@
 #define MAX_LOG_WEAPONS 28
 #define IGNORE_SHOTS_START 25
 #define MAX_WEAPON_LEN 13
+#define MAX_CSS_CT_MODELS 4
+#define MAX_CSS_TS_MODELS 4
 
 
 new g_weapon_stats[MAXPLAYERS+1][MAX_LOG_WEAPONS][15];
@@ -80,6 +82,33 @@ new bool:g_logktraj = false;
 #include <loghelper>
 #include <wstatshelper>
 
+new const String: css_ct_models[MAX_CSS_CT_MODELS][] = {
+    "models/player/ct_urban.mdl", 
+    "models/player/ct_gsg9.mdl", 
+    "models/player/ct_sas.mdl", 
+    "models/player/ct_gign.mdl"
+};
+
+new const String: css_ts_models[MAX_CSS_TS_MODELS][] = {
+    "models/player/t_phoenix.mdl", 
+    "models/player/t_leet.mdl", 
+    "models/player/t_arctic.mdl", 
+    "models/player/t_guerilla.mdl"
+};
+
+new const String: css_code_models[8][] = {
+    "phoenix", 
+    "leet", 
+    "arctic", 
+    "guerilla",
+    "urban", 
+    "gsg9", 
+    "sas", 
+    "gign"
+};
+
+new g_LastTeam[MAXPLAYERS+1] = { -1, ... };
+new g_LastRole[MAXPLAYERS+1] = { -1, ... };
 
 public Plugin:myinfo = {
 	name = NAME,
@@ -198,6 +227,8 @@ unhook_actions()
 public OnClientPutInServer(client)
 {
 	reset_player_stats(client);
+	g_LastTeam[client] = -1;
+	g_LastRole[client] = -1;
 }
 
 
@@ -330,12 +361,51 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
 public Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	// "userid"        "short"         // user ID on server          
-
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	if (client > 0)
+	if (client > 0 && IsClientInGame(client))
 	{
 		reset_player_stats(client);
+		
+		// Track team and role changes
+		new currentTeam = GetClientTeam(client);
+		if (currentTeam <= 1) // Spectator or unassigned
+			return;
+			
+		// Check for player model
+		decl String:clientModel[128];
+		GetClientModel(client, clientModel, sizeof(clientModel));
+		
+		new roleIndex = -1;
+		if (currentTeam == 2) // Terrorist
+		{
+			for (new i = 0; i < MAX_CSS_TS_MODELS; i++)
+			{
+				if (strcmp(css_ts_models[i], clientModel) == 0)
+				{
+					roleIndex = i;
+					break;
+				}
+			}
+		}
+		else if (currentTeam == 3) // Counter-Terrorist
+		{
+			for (new i = 0; i < MAX_CSS_CT_MODELS; i++)
+			{
+				if (strcmp(css_ct_models[i], clientModel) == 0)
+				{
+					roleIndex = i + MAX_CSS_TS_MODELS;
+					break;
+				}
+			}
+		}
+		
+		// If role changed, log it
+		if (roleIndex != -1 && (g_LastRole[client] != roleIndex || g_LastTeam[client] != currentTeam))
+		{
+			LogRoleChange(client, css_code_models[roleIndex]);
+			g_LastRole[client] = roleIndex;
+			g_LastTeam[client] = currentTeam;
+		}
 	}
 }
 
